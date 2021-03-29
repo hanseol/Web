@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=<device-width>, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <form>
+    <table border="1" id="tl">
+        <tr>
+            <td>아이디:</td>
+            <td>
+               <input text type="text" id="id"> 
+            </td>
+        </tr>
+        <tr>
+            <td>비밀번호:</td>
+            <td>
+                <input text type="password" id="passwd">
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <input text type="submit" value=전송 id="submit">
+            </td>
+            <td>
+                <input text type="reset" value="취소" id="reset">
+            </td>
+        </tr>
+    </table>
+    </form>
+    <table id = "tbl" border="1"></table>
+    <button id="click">제출</button>
+    <button id="click2">취소</button>
+    <script>
+        
+        let tableTag = document.getElementById("tbl");
+        
+        let trTag = document.createElement("tr");
+        let tdTag = document.createElement("td");
+
+        let name = document.createTextNode("아이디");
+        tableTag.appendChild(trTag); 
+        tdTag.appendChild(name);
+        trTag.appendChild(tdTag);
+
+        tdTag = document.createElement("input");
+        tdTag.setAttribute("type","text");
+        trTag.appendChild(tdTag);
+
+        trTag = document.createElement("tr");
+        tdTag = document.createElement("td");
+        let passwd=document.createTextNode("비밀번호");
+
+        tableTag.appendChild(trTag);
+        tdTag.appendChild(passwd);
+        trTag.appendChild(tdTag);
+
+        tdTag=document.createElement("input"); 
+        tdTag.setAttribute("type","password");
+        trTag.appendChild(tdTag);
+
+        trTag = document.createElement("tr");
+        tableTag.appendChild(trTag);
+
+        tdTag = document.createElement("td");
+        let btnTag = document.getElementById("click");
+        tdTag.appendChild(btnTag);
+        trTag.appendChild(tdTag);
+
+        tdTag.setAttribute('colspan','2');
+        btnTag = document.getElementById("click2");
+        tdTag.appendChild(btnTag);
+        trTag.appendChild(tdTag);
+
+    </script>
+</body>
+
+</html>

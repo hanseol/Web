@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body id="bdy">
+    <h3>회원리스트</h3>
+    <script>
+
+        let userList = [
+            ["홍길동","1234"],
+            ["김길동","123"],
+            ["이길동","12223"]];
+
+            //let tbl = document.getElementById("tbl"); //이미 있는 요소를 읽어올 때 사용.
+            let tbl = document.createElement("table");
+            tbl.setAttribute("border","1");
+            tbl.setAttribute("id","userList");
+            let bdy = document.getElementById("bdy");
+            bdy.appendChild(tbl);
+
+            for(let i=0;i<userList.length;i++){
+                let trTag, tdTag, text;
+                trTag = document.createElement("tr");
+                tdTag = document.createElement("td");
+                text=document.createTextNode(userList[i][0]);
+                tdTag.appendChild(text);
+                trTag.appendChild(tdTag);
+
+                tdTag = document.createElement("td");
+                text=document.createTextNode(userList[i][1]);
+                tdTag.appendChild(text);
+                trTag.appendChild(tdTag);
+
+                tbl.appendChild(trTag);
+                //console.log("이름=",userList[i][0],"비번=",userList[i][1]);
+            }
+    </script>
+</body>
+</html>

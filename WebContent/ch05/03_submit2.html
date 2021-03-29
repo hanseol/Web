@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body id="getbdy">
+    <script>
+        let bdy = document.getElementById("getbdy");
+
+        let h2Tag = document.createElement("h2");
+        let text = document.createTextNode("입력 양식 데이터 전송 버튼");
+        
+        bdy.appendChild(h2Tag);
+        h2Tag.appendChild(text);
+
+        let formTag = document.createElement("form");
+        formTag.setAttribute("action","page2.jsp");
+        formTag.setAttribute("method","get");
+
+        bdy.appendChild(formTag);
+
+        let pTag = document.createElement("p");
+        text = document.createTextNode("이름: ");
+        let inputTag = document.createElement("input");
+        inputTag.setAttribute("type","text");
+        inputTag.setAttribute("name","name");
+        pTag.appendChild(text);
+        pTag.appendChild(inputTag);
+        formTag.appendChild(pTag);
+
+        pTag = document.createElement("p");
+        text = document.createTextNode("학과: ");
+        inputTag = document.createElement("input");
+        inputTag.setAttribute("type","text");
+        inputTag.setAttribute("name","major");
+        pTag.appendChild(text);
+        pTag.appendChild(inputTag);
+        formTag.appendChild(pTag);
+
+        pTag = document.createElement("p");
+        formTag.appendChild(pTag);
+
+        inputTag = document.createElement("input");
+        inputTag.setAttribute("type","submit");
+        inputTag.setAttribute("value","전송");
+        formTag.appendChild(inputTag);
+
+        
+    </script>
+</body>
+</html>
