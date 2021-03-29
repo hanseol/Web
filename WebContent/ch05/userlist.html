@@ -11,33 +11,72 @@
     <script>
 
         let userList = [
-            ["홍길동","1234"],
-            ["김길동","123"],
-            ["이길동","12223"]];
+            ["홍길동","10"],
+            ["김길동","20"],
+            ["이길동","30"],
+            ["송길동","40"],
+            ["백길동","50"]
+            ];
 
             //let tbl = document.getElementById("tbl"); //이미 있는 요소를 읽어올 때 사용.
             let tbl = document.createElement("table");
+            tbl.setAttribute("width","40%");
             tbl.setAttribute("border","1");
             tbl.setAttribute("id","userList");
             let bdy = document.getElementById("bdy");
             bdy.appendChild(tbl);
-
+            
+            let thTag, trTag, tdTag, text;
+            let avg=0.0, sum=0.0;
+            
+            
+            trTag = document.createElement("tr");
+            thTag = document.createElement("th");
+            text=document.createTextNode("이름");
+            thTag.appendChild(text);
+            trTag.appendChild(thTag);
+            
+            thTag = document.createElement("th");
+            text=document.createTextNode("성적");
+            thTag.appendChild(text);
+            trTag.appendChild(thTag);
+            
+            tbl.appendChild(trTag);
+            
+		
             for(let i=0;i<userList.length;i++){
-                let trTag, tdTag, text;
                 trTag = document.createElement("tr");
                 tdTag = document.createElement("td");
+                tdTag.setAttribute("align","center");
                 text=document.createTextNode(userList[i][0]);
                 tdTag.appendChild(text);
                 trTag.appendChild(tdTag);
 
                 tdTag = document.createElement("td");
+                tdTag.setAttribute("align","center");
                 text=document.createTextNode(userList[i][1]);
                 tdTag.appendChild(text);
                 trTag.appendChild(tdTag);
 
                 tbl.appendChild(trTag);
-                //console.log("이름=",userList[i][0],"비번=",userList[i][1]);
+                sum += parseInt(userList[i][1]);
             }
+            avg = sum/userList.length;
+            
+            trTag = document.createElement("tr");
+            tdTag = document.createElement("td");
+            tdTag.setAttribute("align","center");
+            text=document.createTextNode("평균");
+            tdTag.appendChild(text);
+            trTag.appendChild(tdTag);
+            
+            tdTag = document.createElement("td");
+            tdTag.setAttribute("align","center");
+            text=document.createTextNode(avg);
+            tdTag.appendChild(text);
+            trTag.appendChild(tdTag);
+            
+            tbl.appendChild(trTag);
     </script>
 </body>
 </html>
