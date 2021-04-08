@@ -9,61 +9,71 @@
 </head>
 
 <body>
-    <table id='tbl' border='1'>
-        <tr>
-            <th>check</th>
-            <th>id</th>
-            <th>first_name</th>
-            <th>last_name</th>
-            <th>email</th>
-            <th>gender</th>
-        </tr>
-    </table>
+    <table id='tbl' border='1'></table>
     <script>
         let json =
             '[{"id":1,"first_name":"Sidonnie","last_name":"McCuthais","email":"smccuthais0@forbes.com","gender":"Polygender","ip_address":"253.201.46.69"},{"id":2,"first_name":"Romona","last_name":"Baxill","email":"rbaxill1@guardian.co.uk","gender":"Agender","ip_address":"91.44.220.132"},{"id":3,"first_name":"Nestor","last_name":"Burdin","email":"nburdin2@networkadvertising.org","gender":"Bigender","ip_address":"234.18.182.161"},{"id":4,"first_name":"Kele","last_name":"Currier","email":"kcurrier3@berkeley.edu","gender":"Male","ip_address":"200.232.245.203"},{"id":5,"first_name":"Breanne","last_name":"Jeppe","email":"bjeppe4@miitbeian.gov.cn","gender":"Non-binary","ip_address":"181.86.80.205"}]';
 
-        let data = JSON.parse(json);
-        console.log(data);
+        let people = JSON.parse(json);
+        console.log(people);
 
+        let thText = ['check', 'id', 'first_name', 'last_name', 'email', 'gender', 'click'];
 
-        function createTr(people) {
+        let tbl = document.getElementsByTagName('table')[0];
+        let tblTr = document.createElement('tr');
+        thText.forEach(function (val, idx, ary) {
+            let tblTh = document.createElement('th');
+            tblTh.appendChild(document.createTextNode(val));
+            tblTr.appendChild(tblTh);
+        });
+        tbl.appendChild(tblTr);
+
+        function createTr(person) {
             let trTag = document.createElement('tr');
+            let tdTag = document.createElement('td');
+            let chk = document.createElement('input');
+            chk.setAttribute('type', 'checkbox');
+            tdTag.appendChild(chk);
+            trTag.appendChild(tdTag);
+
+                let cnt = 0;
+                for (field in person) {
+                    let num = Object.keys(person).length - (thText.length-2) ;
+                    num = Object.keys(person).length - num;
+                    
+                    tdTag = document.createElement('td');
+                    if(cnt<num){
+                        tdTag.appendChild(document.createTextNode(person[field]));
+                        trTag.appendChild(tdTag);
+                        cnt++;
+                    }
+                    
+                }
+            
+
+            tdTag = document.createElement('td');
+            let btn = document.createElement('button');
+            btn.onclick = clickFnc;
+            btn.innerHTML = 'X'
+            tdTag.appendChild(btn);
+            trTag.appendChild(tdTag);
+
             trTag.onmouseover = function () {
                 this.style.backgroundColor = 'pink';
             }
             trTag.onmouseout = function () {
                 this.style.backgroundColor = '';
             }
-            let td = document.createElement('td');
-            let chk = document.createElement('input');
-            chk.setAttribute('type', 'checkbox');
-            td.appendChild(chk);
-            trTag.appendChild(td);
-            for (person of people) {
-                for (field in person) {
-                    let tdTag = document.createElement('td');
-                    let text = document.createTextNode(person[field]);
-                    tdTag.appendChild(text);
-                    trTag.appendChild(tdTag);
-                }
-            }
-            td = document.createElement('td');
-            let btn = document.createElement('button');
-            btn.onclick = clickFnc;
-            btn.innerHTML = 'OK'
-            td.appendChild(btn);
-            trTag.appendChild(td);
+
             return trTag;
         }
-        let tbl = document.getElementById('tbl');
 
-        data.forEach(function (val, idx, ary) {
+        people.forEach(function (val, idx, ary) {
             let newTr = createTr(val);
             tbl.appendChild(newTr);
         });
 
-        function clickFnc(){
+        function clickFnc() {
             this.parentNode.parentNode.remove();
         }
     </script>

@@ -6,27 +6,17 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>javaScript 시작</title>
-
 </head>
 
 <body>
-    <div></div>
     <ul id='list'></ul>
     <ul id='members'></ul>
     <table id='tbl' border='1'></table>
+
     <!-- <button onclick='changeColor()'>change color</button> -->
-    <!-- <script src="javascript/object.js"></script> -->
     <script>
         let numbers = [23, 34, 45, 6, 7, 54];
         let sum = 0;
-        let list = document.getElementById('list');
-        numbers.forEach(function (a, b, c) {
-            sum += a;
-            let li = document.createElement('li');
-            let text = document.createTextNode(a);
-            li.appendChild(text);
-            list.appendChild(li);
-        });
         //forEach의 매개값으로 fucntion을 정의.
         //익명함수를 받는 메소드.
         numbers.forEach(function (a, b, c) {
@@ -34,15 +24,11 @@
         });
         console.log(sum);
 
-        
-        let student = {
-            sno: '1111',
-            name: 'Hong',
-            score: 80
-        }
+        let student = { sno: '1111', name: 'Hong', score: 80 };
 
+        //A class may only have one constructor
         class Student {
-            constructor(sno, name, score){
+            constructor(sno, name, score) {
                 this.sno = sno;
                 this.name = name;
                 this.score = score;
@@ -51,46 +37,61 @@
 
         let students = [];
         students.push(student);
-        students.push(new Student('2222','Hwang',90));
-        students.push(new Student('3333','Park',75));
+        students.push(new Student('2222', 'Hwang', 90));
+        students.push(new Student('3333', 'Park', 75));
 
-        function createTr(std) {
-            let trTag = document.createElement('tr');
-            trTag.onmouseover = function(){
+        let tbl = document.getElementsByTagName('table')[0];
+        let tblTd = document.createElement('td');
+
+        let thText = ['체크', '학번', '이름', '점수', '삭제'];
+
+        let tblTr = document.createElement('tr');
+        
+        thText.forEach(function (val, idx, ary) {
+            let tblTh = document.createElement('th');
+            tblTh.appendChild(document.createTextNode(val));
+            tblTr.appendChild(tblTh);
+        });
+        tbl.appendChild(tblTr);
+
+        function createTr(val){
+            tblTr = document.createElement('tr');
+            let chk = document.createElement('input');
+            chk.setAttribute('type', 'checkbox');
+            tblTd = document.createElement('td');
+            tblTd.appendChild(chk);
+            tblTr.appendChild(tblTd);
+            for (field in val) {
+                tblTd = document.createElement('td');
+                tblTd.appendChild(document.createTextNode(val[field]));
+                tblTr.appendChild(tblTd);
+            }
+            let btn = document.createElement('button');
+            btn.innerHTML = 'x';
+            //btn.setAttribute('onclick','clickFnc()'); *** 
+            btn.onclick = clickFnc;
+            tblTd = document.createElement('td');
+            tblTd.appendChild(btn);
+            tblTr.appendChild(tblTd);
+
+            tblTr.onmouseover = function () {
                 this.style.backgroundColor = 'pink';
             }
-            trTag.onmouseout = function(){
+            tblTr.onmouseout = function () {
                 this.style.backgroundColor = '';
             }
-            let td = document.createElement('td');
-            let chk = document.createElement('input');
-            chk.setAttribute('type','checkbox');
-            td.appendChild(chk);
-            trTag.appendChild(td);
-            for (field in std) {
-                let tdTag = document.createElement('td');
-                let text = document.createTextNode(std[field]);
-                tdTag.appendChild(text);
-                trTag.appendChild(tdTag);
-            }
 
-            td = document.createElement('td');
-            let btn = document.createElement('button');
-            btn.onclick = clickFnc;//btn.setAttribute('onclick','clickFnc()');
-            btn.innerHTML = 'OK' //let text = document.createTextNode('OK'); btn.appendChild(text);
-            td.appendChild(btn);
-            trTag.appendChild(td);
-            return trTag;
-        }
-        let tbl = document.getElementById('tbl');
+            return tblTr;
+        };
 
-        students.forEach(function (val, idx, ary) {
-            let newTr = createTr(val);
-            tbl.appendChild(newTr);
+        students.forEach(function (val, idx, ary){
+            let tr = createTr(val);
+            tbl.appendChild(tr);
         });
 
-        function clickFnc(){
+        function clickFnc() {
             this.parentNode.parentNode.remove();
+            console.log(this.parentNode.parentNode);
         }
     </script>
 </body>

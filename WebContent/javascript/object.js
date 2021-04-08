@@ -52,22 +52,16 @@ let m3 = {
 }
 let members = [m1, m2, m3];
 
+let liTag, m='', cnt=0;
 elem = document.getElementById('members');
-
-let text = '';
-let liTag = document.createElement('li');
-let t = [];
-let cnt = 0;
 for (let member of members) {
     for (let field in member) {
-        
-        console.log(member[field]);
-        
-        
-        liTag.appendChild(document.createTextNode(member[field]));
-        //li태그에 hong 80 / 출력하기
-
-    }
-
-    elem.appendChild(liTag);
+        m += ':'+member[field];
+        if((++cnt)%2==0){
+            liTag = document.createElement('li');
+            liTag.appendChild(document.createTextNode(m.substr(1,m.length)));
+            elem.appendChild(liTag);
+            cnt=0; m='';
+        }
+    }   
 }
