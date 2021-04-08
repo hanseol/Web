@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #title {
+            background-color: beige;
+            font-size: 14pt;
+        }
+        #cap {
+            font-size: 20pt;
+        }
+        #calendar {
+            border:3px solid gray;
+            padding: 20px;
+        }
+        #start-blank{
+            background-color: white;
+        }
+
+        #end-blank {
+            background-color: lightgray;
+        }
+
+        td{
+            width: 50px;
+            height: 50px;
+        }
+        td:nth-of-type(1){
+            background-color:lightcoral;
+        }
+        td:nth-of-type(7){
+            background-color:lightskyblue;
+        }
+
+        
+        
+    </style>
+    <script src="javascript/cal.js"></script>
+</head>
+
+<body>
+    <script>
+        for(let m=1;m<=12;m++){
+            createCalendar(2021,m);
+        }
+        // createCal();
+
+        function createCalendar(year, month) {
+            let today = new Date(year,month-1);
+            let thisYear = today.getFullYear();
+            let thisMonth = today.getMonth();
+            let thisDate = today.getDate();
+            let thisDay = today.getDay();
+
+            let firstDate = new Date(thisYear, thisMonth, 1);
+            let day = firstDate.getDay();
+            console.log(day); //4:금요일
+
+            let lastDate = new Date(thisYear, thisMonth + 1, 0); //이번달 마지막 날   
+            let last = lastDate.getDate();
+            console.log(last);
+
+            let dayTitle = ['일', '월', '화', '수', '목', '금', '토'];
+            let str = "<table id='calendar' border='1'><tr>";
+            str += '<caption id="cap">' + year + '년' + month + '월</caption>'; 
+
+            for (var i = 0; i < dayTitle.length; i++) {
+                str += "<th id='title'>" + dayTitle[i] + "</th>";
+            }
+
+            str += "</tr><tr>";
+            for (var j = 0; j < day; j++) {
+                str += "<td id='start-blank'></td>";
+            }
+            for (var j = 1; j <= last; j++) {
+                str += "<td id='date'>" + j + "</td>";
+                day++;
+                if (7 - day == 0) {
+                    str += "</tr><tr>";
+                    day = 0;
+                }
+            }
+            if (day != 0) {
+                for (var i = 0; i < 7 - day; i++) {
+                    str += "<td id='end-blank'></td>";
+                }
+            }
+            str += "</tr>";
+
+            document.write(str);
+        }
+        console.log(this);
+    </script>
+</body>
+
+</html>

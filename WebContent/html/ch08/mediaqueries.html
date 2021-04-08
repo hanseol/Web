@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        .row {
+            display: flex;
+            flex-wrap: wrap;
+            /* flex-direction: column; */
+        }
+
+        .column {
+            flex: 25%;
+            padding: 40px;
+        }
+
+        @media screen and (max-width:992px) {
+            .column {
+                flex: 50%
+            }
+        }
+
+        @media screen and (max-width: 600px) {
+            .row {
+                flex-direction: column;
+            }
+        }
+
+        /* Hide Example */
+        div.example {
+            background-color: lavenderblush;
+            padding:20px;
+            font-size: 40pt;
+            text-align: center;
+            color:lightslategray;
+        }
+
+        @media screen and (min-width:992px){
+            div.example{
+                text-align: center;
+                font-size: 80pt;
+                font-style: italic;
+                color:purple;
+            }
+        }
+        @media screen and (max-width:600px){
+            div.example {
+                display: none;
+            }
+        }
+
+    </style>
+</head>
+
+<body>
+    <h2>Responsive Four Column Layout with Flex</h2>
+    <p><strong>Resize the browser window to see the responsive effect.</strong> On screens that are 992px wide or less,
+        the columns will resize from four columns to two columns. On screens that are 600px wide or less, the columns
+        will stack on top of each other instead of next to eachother.</strong>
+    </p>
+
+    <div class="row">
+        <div class="column" style="background-color: lavender;">
+            <h2>Column 1</h2>
+            <p>오늘 점심</p>
+        </div>
+
+        <div class="column" style="background-color: rgb(199, 199, 247);">
+            <h2>Column 2</h2>
+            <p>면 만드는 사람들</p>
+        </div>
+
+        <div class="column" style="background-color: rgb(183, 183, 241);">
+            <h2>Column 3</h2>
+            <p>육개장</p>
+        </div>
+
+        <div class="column" style="background-color: rgb(161, 161, 253);">
+            <h2>Column 4</h2>
+            <p>곱배기!</p>
+        </div>
+    </div>
+
+    <h2>Hide elements on different screen sizes</h2>
+    <h2>Change the font size of an element on different screen sizes</h2>
+
+    <div class="example">Example DIV.</div>
+    <p>
+        When the browser's width is 600px wide or less, hide the div element. Resize the browser window to see the
+        effect.</p>
+    </p>
+
+
+
+</body>
+
+</html>

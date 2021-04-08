@@ -1,13 +1,98 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
+
 <head>
-<meta charset="EUC-KR">
-<title>Insert title here</title>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>javaScript ì‹œì‘</title>
+
 </head>
+
 <body>
-	<h1>home page</h1>
-	<a href="intro/myinfo.html">intro/myinfo.html·Î °¡¿ä</a>
-	<br><br><br>
-	<a href="career/mycareer.html">career/mycareer.html·Î °¡¿ä</a>
+    <div></div>
+    <ul id='list'></ul>
+    <ul id='members'></ul>
+    <table id='tbl' border='1'></table>
+    <!-- <button onclick='changeColor()'>change color</button> -->
+    <!-- <script src="javascript/object.js"></script> -->
+    <script>
+        let numbers = [23, 34, 45, 6, 7, 54];
+        let sum = 0;
+        let list = document.getElementById('list');
+        numbers.forEach(function (a, b, c) {
+            sum += a;
+            let li = document.createElement('li');
+            let text = document.createTextNode(a);
+            li.appendChild(text);
+            list.appendChild(li);
+        });
+        //forEachì˜ ë§¤ê°œê°’ìœ¼ë¡œ fucntionì„ ì •ì˜.
+        //ìµëª…í•¨ìˆ˜ë¥¼ ë°›ëŠ” ë©”ì†Œë“œ.
+        numbers.forEach(function (a, b, c) {
+            sum += a;
+        });
+        console.log(sum);
+
+        
+        let student = {
+            sno: '1111',
+            name: 'Hong',
+            score: 80
+        }
+
+        class Student {
+            constructor(sno, name, score){
+                this.sno = sno;
+                this.name = name;
+                this.score = score;
+            }
+        }
+
+        let students = [];
+        students.push(student);
+        students.push(new Student('2222','Hwang',90));
+        students.push(new Student('3333','Park',75));
+
+        function createTr(std) {
+            let trTag = document.createElement('tr');
+            trTag.onmouseover = function(){
+                this.style.backgroundColor = 'pink';
+            }
+            trTag.onmouseout = function(){
+                this.style.backgroundColor = '';
+            }
+            let td = document.createElement('td');
+            let chk = document.createElement('input');
+            chk.setAttribute('type','checkbox');
+            td.appendChild(chk);
+            trTag.appendChild(td);
+            for (field in std) {
+                let tdTag = document.createElement('td');
+                let text = document.createTextNode(std[field]);
+                tdTag.appendChild(text);
+                trTag.appendChild(tdTag);
+            }
+
+            td = document.createElement('td');
+            let btn = document.createElement('button');
+            btn.onclick = clickFnc;//btn.setAttribute('onclick','clickFnc()');
+            btn.innerHTML = 'OK' //let text = document.createTextNode('OK'); btn.appendChild(text);
+            td.appendChild(btn);
+            trTag.appendChild(td);
+            return trTag;
+        }
+        let tbl = document.getElementById('tbl');
+
+        students.forEach(function (val, idx, ary) {
+            let newTr = createTr(val);
+            tbl.appendChild(newTr);
+        });
+
+        function clickFnc(){
+            this.parentNode.parentNode.remove();
+        }
+    </script>
 </body>
+
 </html>

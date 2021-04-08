@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>회원가입</title>
+    <style>
+        header.subject {
+            border-bottom: 1px dotted gray;
+            overflow: auto;
+        }
+
+        .subject>h2 {
+            display: inline;
+        }
+
+        .subject>p {
+            float: right;
+            margin-right: 10px;
+        }
+
+        #display {
+            font-size: 13pt;
+            font-weight: bolder;
+        }
+
+        #asta {
+            color: red;
+        }
+
+        #info {
+            color: darkgrey;
+            font-size: 10pt;
+        }
+
+        .input_list {
+            width: 20%;
+            float: left;
+            position:absolute;
+            left:10px;
+        }
+
+        .input_content {
+            position: absolute;
+            left:250px;
+            float: left;
+        }
+        .parent {
+            margin-top:3%;
+        }
+
+        #input_view{
+            width: 250px;
+            height: 27px;
+            border: 1px solid lightgray;
+        }
+    </style>
+</head>
+
+<body>
+    <header class='subject'>
+        <h2>
+            <text>회원정보</text>
+            <text style="color: cyan;">(필수)</text>
+        </h2>
+        <p>
+            <text id='info'>* </text>
+            <text id='info'>는 필수 입력 사항입니다.</text>
+        </p>
+    </header>
+
+    <section>
+        <div class='parent'>
+            <div class='input_list'>
+                <text id="display">아이디
+                <sup id="asta">*</sup>
+                </text>
+            </div>
+            <div class='input_content'>
+                <input type="text" id='input_view' placeholder='4자리 이상'>
+                <button>아이디 중복 확인</button>
+            </div>
+        </div>
+
+        <br>
+        <div class='parent'>
+            <div class='input_list'>
+                <text id="display">비밀번호
+                <sup id="asta">*</sup>
+                </text>
+            </div>
+            <div class='input_content'>
+                <input type="password" id='input_view' placeholder="********">
+                <text id='info'>8~20자리의 영문, 숫자 조합(영문,숫자,특수 기호 조합을 권장합니다)</text>
+            </div>
+        </div>
+
+        <br>
+        <div class='parent'>
+            <div class='input_list'>
+                <text id="display">비밀번호 확인
+                <sup id="asta">*</sup>
+                </text>
+            </div>
+            <div class='input_content'>
+                <input type="password" id='input_view' placeholder="********">
+            </div>
+        </div>
+
+        <br>
+        <div class='parent'>
+            <div class='input_list'>
+                <text id="display">이름
+                <sup id="asta">*</sup>
+                </text>
+            </div>
+            <div class='input_content'>
+                <input type="text" id='input_view'>
+            </div>
+        </div>
+
+        <br>
+        <div class='parent'>
+            <div class='input_list'>
+                <text id="display">성별
+                    <sup id="asta">*</sup>
+                </text></div>
+                <div class='input_content'>
+            <input type="radio">남성
+            <input type="radio">남성
+        </div>
+        </div>
+
+        <br>
+        <div class='parent'>
+            <div class='input_list'>
+                <text id="display">생년월일
+                    <sup id="asta">*</sup>
+                </text></div>
+                <div class='input_content'>
+            <input type="date">
+            <input type="radio">양력
+            <input type="radio">음력</div>
+        </div>
+
+        <br>
+        <div class='parent'>
+            <div class='input_list'>
+                <text id="display">이메일
+                    <sup id="asta">*</sup>
+                </text></div>
+                <div class='input_content'>
+            <input type="text" id='input_view'>@<input type="text" id='input_view'>
+            <select name="domain">
+                <option value="1" selected>직접입력</option>
+                <option value="2">naver.com</option>
+                <option value="3">hanmail.net</option>
+                <option value="4">gmail.com</option>
+            </select>
+        </div>
+        </div>
+
+        <br>
+        <div class='parent'>
+            <div class='input_list'>
+                  <p></p>
+            </div>
+            <div class='input_content'>
+            <text id='info'>이메일 수신동의 시, 신상품/할인혜택/이벤트 등의 정보를 받아보실 수 있습니다.<br>
+                수신동의 거부 시에도 기본 서비스(주문배송 메일)는 발송됩니다.
+            </text>
+            <input type="radio">예
+            <input type="radio">아니오
+        </div>
+        </div>
+
+
+        <br>
+        <div class='parent'>
+            <div class='input_list'>
+                <text id="display">휴대전화
+                    <sup id="asta">*</sup>
+                </text>
+            </div>
+            <div class='input_content'>
+            <input type="text" id='input_view' style="width: 100px;">-
+            <input type="text" id='input_view' style="width: 100px;">-
+            <input type="text" id='input_view' style="width: 100px;">
+        </div>
+        </div>
+
+
+        <br>
+        <div class='parent'>
+            <div class='input_list'>
+                <p></p>
+            </div>
+            <div class='input_content'>
+            <text id='info'>할인혜택과 이벤트 등의 소식 안내를 SNS로 받으실 수 있습니다.<br>
+                수신동의 거부 시에도 기본서비스는 발송됩니다.
+            </text>
+            <input type="radio">예
+            <input type="radio">아니오
+            </div>
+        </div>
+
+        <br>
+        <div class='parent'>
+            <div class='input_list'>
+                <text id="display">관심 브랜드
+                    <sup id="asta">*</sup>
+                </text>
+            </div>
+            <div class='input_content'>
+            <input type="checkbox">한빛미디어
+            <input type="checkbox">한빛아카데미
+            <input type="checkbox">한빛비즈
+            <br>
+            <input type="checkbox">한빛라이프
+            <input type="checkbox">리얼타임 eBook
+            <input type="checkbox">MAKE
+            <br>
+            <input type="checkbox">한빛에듀
+        </div>
+        </div>
+    </section>
+</body>
+
+</html>

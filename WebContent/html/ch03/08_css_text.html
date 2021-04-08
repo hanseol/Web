@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        p[text] {color:red;}
+        p[text="red"] {color: greenyellow; background-color: purple;}
+        p[text~="cc"] {color:aliceblue; background-color:darkgray;}
+        p[text|="bb"] {color: black; background-color: pink;}
+        p[text^="ing"] {color: greenyellow; background-color: purple;}
+        p[text$=".png"] {color: yellow; background-color: black;}
+        p[text*="ong"] {color: orange; background-color: greenyellow;}
+    </style>
+</head>
+<body>
+    <div>
+    <h2>Text Selector</h2>
+    <p text>모든 텍스트</p>
+    <p text="red">텍스트 매칭 속성</p>
+    <p text="aa bb cc">리스트 매칭 속성</p>
+    <p text="bb-cc-aa">list matching attribution</p>
+    <p text="img/pic.jpg">text start matching attribution</p>
+    <p text="img/pic.png">text end matching attribution</p>
+    <p text="Seongyong Hong">text pattern matching attribution</p>
+</div>
+    <button onclick = "del_func()">Click</button>
+
+    <script>
+        function del_func(){
+            let text = document.querySelectorAll('p[text~=cc]');
+            for(let i = 0; i<text.length; i++){
+                text[i].remove();
+            }
+        }
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>page layout</title>
+    <style>
+        *{
+            border: 1px solid gray;
+            text-align: center;
+            box-sizing:border-box;
+            border-radius: 5px;
+        }
+        header.container{
+            background-color: bisque;
+            height: 10vh;
+        }
+        nav, section, aside {
+            background-color: greenyellow;
+            margin: 1% 1%;
+        }
+        nav{
+            width:22%;
+            float:left;
+            height:50vh;
+        }
+
+        section {
+            width: 50%;
+            float: left;
+            height: 50vh;
+        }
+
+        section>header, section>article, section>footer {
+            background-color: rgb(255, 225, 255);
+            margin-left: 1%;
+            margin-right: 1%;
+        }
+        section>header {
+            margin-top: 5%;
+            height: 10%;
+        }
+
+        section>article {
+            margin-top : 5%;
+            height: 40%;
+        }
+
+        section>footer {
+            margin-top: 1%;
+            height: 20%;
+        }
+
+        aside{
+            width:22%;
+            float:left;
+            height:50vh;
+        }
+
+        footer.container{
+            background-color: bisque;
+            height: 30px;
+            clear:left;
+            width: 98%;
+            margin: 1%;
+        }
+    ul>li {
+        display: inline;
+        border-width: 0;
+    }
+    ul>li>a{
+        border-width: 0;
+    }
+    </style>
+
+    
+
+</head>
+
+<body>
+    <header class='container'>
+        <ul>
+            <li><a href="#">주제1</a></li>
+            <li>주제2</li>
+            <li>주제3</li>
+            <li>주제4</li>
+        </ul>
+    </header>
+
+    <nav>
+        &lt;nav&gt;
+    </nav>
+
+    <section>
+        &lt;section&gt;
+        <header class='item'>
+            &lt;header&gt;
+        </header>
+        <article>
+            &lt;article&gt;
+        </article>
+        <footer>
+            &lt;footer&gt;
+        </footer>
+    </section>
+
+    <aside>
+        &lt;aside&gt;
+    </aside>
+
+    <footer class='container'>
+        &lt;footer&gt;
+    </footer>
+</body>
+
+</html>
