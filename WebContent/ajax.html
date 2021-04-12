@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ajax.html</title>
+    <!-- <script src="javascript/ajax2.js"></script> -->
+</head>
+
+<body>
+    <!--Asynchronous JavaScript And Xml-->
+    <!-- p#showCD -->
+    <p id="showCD"></p> 
+   
+    <table id='tbl' border="1"></table>
+    <script>
+        let table;
+        let rows;
+        let xhtp = new XMLHttpRequest();
+        //onreadystatechange 이벤트가 발생하면 함수를 실행하세요.
+        xhtp.onreadystatechange = function(){
+            if(xhtp.readyState==4 && xhtp.status==200){
+                let doc = xhtp.responseXML;
+                rows = doc.getElementsByTagName('CD');
+                console.log(rows);
+                table = '<tr><th>Artis</th><th>Title</th></tr>';
+                for(let i=0; i<rows.length;i++){
+                    table += '<tr onclick=displayCD('+ i +')><td>'+rows[i].getElementsByTagName('ARTIST')[0].innerHTML+'</td><td>'
+                                        +rows[i].getElementsByTagName('TITLE')[0].innerHTML+'</td></tr>'
+                }
+                document.getElementById('tbl').innerHTML = table;
+            }
+        }
+        
+        //비동기방식 :  / 동기방식: 순차적으로 실행.
+        xhtp.open('get','cd_catalog.xml'); //매개값에 false를 넣으면 동기방식.
+        xhtp.send();
+        
+        function displayCD(i){
+            let row = 
+            'Artist: ' + rows[i].getElementsByTagName('ARTIST')[0].innerHTML + '<br>'
+            + 'TITLE: ' + rows[i].getElementsByTagName('TITLE')[0].innerHTML + '<br>'
+            + 'YEAR: ' + rows[i].getElementsByTagName('YEAR')[0].innerHTML;
+
+            document.getElementById('showCD').innerHTML=row;
+
+        }
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,4 @@
+ajax.txt
+Hello
+World
+Nice

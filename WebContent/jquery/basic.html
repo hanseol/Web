@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <!-- <script src="./jquery-3.6.0.min.js"></script> -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script>
+        $(document).ready(function(){
+            // document.getElementById('show').innerHTML = 'HELLO';
+            $('#show').html('HELLO');
+            // $('<td />').attr('id','first'); // document.createElement('td');
+        
+            let tbl = $('<table border="1"/>').attr('id','tbl');
+            let tr = $('<tr />').append(
+                $('<td />').html('name'),
+                $('<td />').html('id'));
+            tbl.append(tr);
+                console.log(tbl);
+            $('body').eq(0).append(tbl);
+        });
+
+
+
+        // window.onload = function(){ //window.onload 이벤트가 실행하면 수행.
+        //     document.getElementById('show').innerHTML = 'Hello';
+        // }
+    </script>
+</head>
+<body>
+    <p id="show"></p>
+</body>
+</html>
