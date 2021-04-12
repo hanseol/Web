@@ -17,6 +17,7 @@
         let people = JSON.parse(json);
         console.log(people);
 
+
         let thText = ['check', 'id', 'first_name', 'last_name', 'email', 'gender', 'click'];
 
         let tbl = document.getElementsByTagName('table')[0];
@@ -36,20 +37,18 @@
             tdTag.appendChild(chk);
             trTag.appendChild(tdTag);
 
-                let cnt = 0;
-                for (field in person) {
-                    let num = Object.keys(person).length - (thText.length-2) ;
-                    num = Object.keys(person).length - num;
-                    
-                    tdTag = document.createElement('td');
-                    if(cnt<num){
-                        tdTag.appendChild(document.createTextNode(person[field]));
-                        trTag.appendChild(tdTag);
-                        cnt++;
-                    }
-                    
+            let cnt = 0;
+            for (field in person) {
+                let num = Object.keys(person).length - (thText.length - 2);
+                num = Object.keys(person).length - num;
+
+                tdTag = document.createElement('td');
+                if (cnt < num) {
+                    tdTag.appendChild(document.createTextNode(person[field]));
+                    trTag.appendChild(tdTag);
+                    cnt++;
                 }
-            
+            }
 
             tdTag = document.createElement('td');
             let btn = document.createElement('button');
@@ -68,6 +67,14 @@
             return trTag;
         }
 
+
+        let selectedDel = document.createElement('input');
+        selectedDel.setAttribute('type', 'button');
+        selectedDel.setAttribute('value', '선택 삭제');
+        selectedDel.onclick = clickFnc2;
+        let bdy = document.getElementsByTagName('body')[0];
+        bdy.appendChild(selectedDel);
+
         people.forEach(function (val, idx, ary) {
             let newTr = createTr(val);
             tbl.appendChild(newTr);
@@ -75,6 +82,33 @@
 
         function clickFnc() {
             this.parentNode.parentNode.remove();
+        }
+
+
+
+        //선택지우기 querySelectorAll//
+        function clickFnc2() {
+            let checkedAll = document.querySelectorAll('td>input[type="checkbox"]:checked');
+            for(let i=0; i<checkedAll.length;i++){
+                checkedAll[i].parentNode.parentNode.remove();
+            }
+            rows = document.querySelectorAll('tr'); 
+            if(rows)
+            console.log(rows);
+        }
+
+        let chkbox = document.createElement('input');
+        chkbox.setAttribute('type', 'checkbox');
+        chkbox.setAttribute('id', 'selectAll');
+        chkbox.onchange = allCheck;
+        bdy.appendChild(chkbox);
+
+        function allCheck() {
+            let tChk = document.getElementById('selectAll');
+            let checks = document.querySelectorAll('td>input[type="checkbox"]');
+            for (let i = 0; i < checks.length; i++) {
+                checks[i].checked = tChk.checked;
+            }
         }
     </script>
 </body>
