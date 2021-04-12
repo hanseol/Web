@@ -17,42 +17,53 @@
         let people = JSON.parse(json);
         console.log(people);
 
-        let thText = ['check', 'id', 'first_name', 'last_name', 'email', 'gender', 'click'];
+        let thText = ['check', 'id','first_name', 'last_name', 'email', 'gender', 'delAll'];
 
         let tbl = document.getElementsByTagName('table')[0];
-        let tblTr = document.createElement('tr');
+        let trTag, thTag, tdTag, chk, btn;
+        
+        trTag = document.createElement('tr');
+
         thText.forEach(function (val, idx, ary) {
-            let tblTh = document.createElement('th');
-            tblTh.appendChild(document.createTextNode(val));
-            tblTr.appendChild(tblTh);
+            thTag = document.createElement('th');
+            if(val=='check'){
+                chk = document.createElement('input');
+                chk.setAttribute('type','checkbox');
+                thTag.appendChild(chk);
+                trTag.appendChild(thTag);
+            }else if(val=='delAll'){
+                btn = document.createElement('input');
+                btn.setAttribute('type','button');
+                btn.setAttribute('value','X')
+                thTag.appendChild(btn);
+                trTag.appendChild(thTag);
+            }else{
+                thTag.appendChild(document.createTextNode(val));
+                trTag.appendChild(thTag);
+            }
         });
-        tbl.appendChild(tblTr);
+        tbl.appendChild(trTag);
 
         function createTr(person) {
-            let trTag = document.createElement('tr');
-            let tdTag = document.createElement('td');
-            let chk = document.createElement('input');
+            trTag = document.createElement('tr');
+            tdTag = document.createElement('td');
+            chk = document.createElement('input');
             chk.setAttribute('type', 'checkbox');
             tdTag.appendChild(chk);
             trTag.appendChild(tdTag);
 
-                let cnt = 0;
-                for (field in person) {
-                    let num = Object.keys(person).length - (thText.length-2) ;
-                    num = Object.keys(person).length - num;
-                    
-                    tdTag = document.createElement('td');
-                    if(cnt<num){
+            for (field in person) {
+                for(var i=1; i<thText.length-1; i++){
+                    if(field == thText[i]){
+                        tdTag = document.createElement('td');
                         tdTag.appendChild(document.createTextNode(person[field]));
                         trTag.appendChild(tdTag);
-                        cnt++;
-                    }
-                    
+                    }                        
                 }
-            
+            }
 
             tdTag = document.createElement('td');
-            let btn = document.createElement('button');
+            btn = document.createElement('button');
             btn.onclick = clickFnc;
             btn.innerHTML = 'X'
             tdTag.appendChild(btn);
@@ -76,6 +87,37 @@
         function clickFnc() {
             this.parentNode.parentNode.remove();
         }
+
+        function selectAll(){
+            for(let i=0; i<checks.length;i++){
+                checks[i].checked = test.checked;
+            }
+            if(checks.length==0){
+                window.alert('항목이 없습니다.');
+            }
+        }
+
+        function deleteAll(){
+            for(let i=0; i<checks.length;i++){
+                if(checks[i].checked==true){
+                    checks[i].parentNode.parentNode.remove();
+                }
+            }
+            let cnt = document.querySelectorAll('td>input[type=checkbox]');
+            if(cnt.length==0){
+                test.checked=false;
+                console.log(cnt.length);
+            }
+        }
+
+        let test = document.querySelector('th>input[type=checkbox]');
+        let checks = document.querySelectorAll('td>input[type=checkbox]');
+        test.onclick = selectAll;
+
+        let test2 = document.querySelector('th>input[type=button');
+        test2.onclick = deleteAll;
+
+        
     </script>
 </body>
 
