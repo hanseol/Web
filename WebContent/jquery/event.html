@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>jquery/event.html</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <!-- <script src="event.js"></script> -->
+    <script>
+        console.log('1');
+        $.ajax({
+            url: '../MOCK_DATA.json',
+            success: function (result) {
+                let objs = $(result).map(function (idx, obj) {
+                    let person = {}; //새로운 오브젝트를 생성
+                    person.name = obj.first_name;
+                    person.email = obj.email;
+                    return person;
+                }).filter(function (idx, obj) {
+                    return idx < 5;
+                });
+                //    let objf = $(objs).filter(function(idx,obj){
+                //        return idx < 5; 
+                //    })
+                console.log(objs);
+                console.log('2');
+
+                let tbl = $('<table />').attr('border', '1');
+                $(objs).each(function (idx, obj) { //each:반환값이 없음, map, filter:return값이 있음.
+                    let trTag = $('<tr />');
+                    trTag.on({ //{'이벤트이름' : 핸들러}
+                        'mouseover': function () {
+                            $(this).css('background-color', 'yellow');
+                        },
+                        'mouseout': function () {
+                            $(this).css('background-color', '');
+                        },
+                        'click': function () {
+                            console.log($(this).children().eq(0).html());
+                        }
+                    });
+                    let tdTag = $('<td />');
+                    let ips = $('<input />').attr('type', 'checkbox');
+                    trTag.append(tdTag.append(ips));
+
+                    for (field in obj) {
+                        let tdTag = $('<td />').html(obj[field]);
+                        trTag.append(tdTag);
+                    }
+                    tbl.append(trTag);
+                });
+                $('body').append(tbl);
+
+                $('body').append($('<button />').html('삭제').click(delChecked));
+            }
+        });
+        console.log('3');
+
+        function delChecked() {
+            $('td>input[type="checkbox"]:checked').parentsUntil('table').css('color', 'pink').remove();
+        }
+    </script>
+</head>
+
+<body>
+    <button id='btn'>click</button>
+    <button id='bton'>click-2</button>
+    <button id="btnOn">click-3</button>
+    <button id="buttonOn">click-4</button>
+    <script>
+        //jQuery.
+        //1. 메소드로 처리
+        $('#btnOn').click(function () {
+            alert('click!click!click!');
+        });
+        $('#btnOn').mouseover(function () {
+            $(this).css('background-color', 'yellow');
+        });
+        $('#btnOn').mouseout(function () {
+            $(this).css('background-color', '');
+        });
+        //2.
+
+        $('#buttonOn').on({
+            'click': function () {
+                alert('click!click!click!click!');
+            },
+            'mouseover': function () {
+                $(this).css('background-color', 'yellow');
+            },
+            'mouseout': function () {
+                $(this).css('background-color', '');
+            }
+        });
+
+        //javaScript
+        //1.
+        let btn = document.getElementById('btn');
+        btn.onclick = function () {
+            alert('click!');
+        };
+        btn.onmouseover = function () {
+            this.style.backgroundColor = 'yellow';
+        };
+        btn.onmouseout = function () {
+            this.style.backgroundColor = '';
+        };
+
+        //2.addEventListener 
+        let bton = document.getElementById('bton');
+        bton.addEventListener('click', function () {
+            alert('click!click!');
+        });
+        bton.addEventListener('mouseover', function () {
+            this.style.backgroundColor = 'yellow';
+        });
+        bton.addEventListener('mouseout', function () {
+            this.style.backgroundColor = "";
+        })
+        console.log('4');
+    </script>
+</body>
+
+</html>
