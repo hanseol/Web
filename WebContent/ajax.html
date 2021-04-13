@@ -23,6 +23,7 @@
         xhtp.onreadystatechange = function(){
             if(xhtp.readyState==4 && xhtp.status==200){
                 let doc = xhtp.responseXML;
+                console.log(doc);
                 rows = doc.getElementsByTagName('CD');
                 console.log(rows);
                 table = '<tr><th>Artis</th><th>Title</th></tr>';
