@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<title>DB연동</title>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+	<script>
+		$(document).ready(function () {
+			//show list 
+			$.ajax({
+				url: 'ajaxList.jsp',
+				dataType: 'json',
+				success: function (result) {
+					//let data = JSON.parse(result);
+					console.log(result);
+					let tbl = $('<table />').attr('border','1');
+					let trTag, tdTag, thTag;
+					
+					for(data of result){
+						console.log(data)
+						trTag = $('<tr />').append(
+							$('<td />').html(data.boardNo)
+						);
+					}
+				},
+				error: function(e){
+					console.error(e);
+				}
+			});
+
+			$('#frm').submit(function (event) {
+				event.preventDefault(); //single page
+				console.log($('#frm').serialize());
+				$.ajax({
+					url: $('#frm').attr('action'), // url : 'ajax.jsp',
+					// data : {boardNo : $('input[name="boardNo"][0]').val(), 
+					// 		title : $('input[name="title"]').val(), 
+					// 		content : $('textarea[name="content"]').val(), 
+					// 		writer : $('input[name="writer"]').val()}, 
+					/* javascript의 object type. data: 'boardNo=3&title=test&content=test&writer=user1'*/
+					data: $('#frm').serialize(),
+					success: function (data) {
+						let result = JSON.parse(data); //json=>object
+						console.log(result);
+
+						$('input[name="boardNo"]').val(''); //매개값을 적으면 값을 넘겨주는것, 매개값이 없으면 값을 읽어오는것?
+						$('input[name="title"]').val('');
+						$('textarea[name="content"]').val('');
+						$('input[name="writer"]').val('');
+					},
+					error: function (e) {
+						console.log(e);
+					}
+				});
+			});
+
+		});
+	</script>
+</head>
+
+<body>
+	<form action="ajax.jsp" id="frm" method="GET">
+		<div> 게시글번호 : <input type="text" name="boardNo"></div>
+		<div> 제목 : <input type="text" name="title"></div>
+		<div> 내용 : <textarea name="content" cols="30" rows="10"></textarea></div>
+		<div> 작성자 : <input type="text" name="writer"></div>
+		<input type="submit" value="입력하라~">
+		<input type="reset" value="취소@-@">
+	</form>
+
+	<div id="show"></div>
+
+</body>
+
+</html>
