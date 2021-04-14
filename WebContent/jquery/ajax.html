@@ -12,17 +12,44 @@
 				url: 'ajaxList.jsp',
 				dataType: 'json',
 				success: function (result) {
-					//let data = JSON.parse(result);
-					console.log(result);
+					//let data = JSON.parse(result); json->object
 					let tbl = $('<table />').attr('border','1');
 					let trTag, tdTag, thTag;
 					
-					for(data of result){
-						console.log(data)
+					/* for(data of result){
+						trTag = $('<tr />');
+						for(field in data){
+							console.log(data[field]);
+							tdTag = $('<td />').html(data[field])
+							trTag.append(tdTag);
+						}
+						tbl.append(trTag);
+					} */
+					
+					/* for(data of result){
 						trTag = $('<tr />').append(
-							$('<td />').html(data.boardNo)
-						);
-					}
+							$('<td />').html(data.boardNo),
+							$('<td />').html(data.title),
+							$('<td />').html(data.content),
+							$('<td />').html(data.writer),
+						)
+						tbl.append(trTag);
+					} */
+					
+					result.forEach(function(obj,idx){
+						trTag = $('<tr />').append($('<td />').append($('<input />').attr('type','checkbox')),
+												$('<td />').html(obj.boardNo),
+												$('<td />').html(obj.title),
+												$('<td />').html(obj.content),
+												$('<td />').html(obj.writer),
+												$('<td />').append($('<input />').attr('type','button').attr('value','X')));
+												
+												tbl.append(trTag);
+					});
+					
+					
+					$('#show').html(tbl);
+					
 				},
 				error: function(e){
 					console.error(e);
@@ -68,7 +95,7 @@
 		<input type="submit" value="입력하라~">
 		<input type="reset" value="취소@-@">
 	</form>
-
+	<p />
 	<div id="show"></div>
 
 </body>

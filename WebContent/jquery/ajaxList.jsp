@@ -6,6 +6,7 @@
 <%
 	BoardDAO dao = new BoardDAO();
 	List<Board> list = dao.getBoardList();
+	
 	String result ="[";
 	//list -> json 파일
 	for(int i=0;i<list.size();i++){

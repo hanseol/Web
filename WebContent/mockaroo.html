@@ -15,14 +15,8 @@
             '[{"id":1,"first_name":"Sidonnie","last_name":"McCuthais","email":"smccuthais0@forbes.com","gender":"Polygender","ip_address":"253.201.46.69"},{"id":2,"first_name":"Romona","last_name":"Baxill","email":"rbaxill1@guardian.co.uk","gender":"Agender","ip_address":"91.44.220.132"},{"id":3,"first_name":"Nestor","last_name":"Burdin","email":"nburdin2@networkadvertising.org","gender":"Bigender","ip_address":"234.18.182.161"},{"id":4,"first_name":"Kele","last_name":"Currier","email":"kcurrier3@berkeley.edu","gender":"Male","ip_address":"200.232.245.203"},{"id":5,"first_name":"Breanne","last_name":"Jeppe","email":"bjeppe4@miitbeian.gov.cn","gender":"Non-binary","ip_address":"181.86.80.205"}]';
 
         let people = JSON.parse(json);
-        console.log(people);
 
-<<<<<<< HEAD
-        let thText = ['check', 'id','first_name', 'last_name', 'email', 'gender', 'delAll'];
-=======
-
-        let thText = ['check', 'id', 'first_name', 'last_name', 'email', 'gender', 'click'];
->>>>>>> branch 'master' of https://github.com/hanseol/Web.git
+        let thText = ['check', 'id', 'first_name', 'last_name', 'gender', 'email', 'check'];
 
         let tbl = document.getElementsByTagName('table')[0];
         let trTag, thTag, tdTag, chk, btn;
@@ -39,11 +33,13 @@
             }else if(val=='delAll'){
                 btn = document.createElement('input');
                 btn.setAttribute('type','button');
-                btn.setAttribute('value','X')
+                btn.setAttribute('value','X');
+                btn.onclick=deleteAll;
                 thTag.appendChild(btn);
                 trTag.appendChild(thTag);
             }else{
                 thTag.appendChild(document.createTextNode(val));
+                thTag.setAttribute('id','thList');
                 trTag.appendChild(thTag);
             }
         });
@@ -57,29 +53,14 @@
             tdTag.appendChild(chk);
             trTag.appendChild(tdTag);
 
-<<<<<<< HEAD
-            for (field in person) {
-                for(var i=1; i<thText.length-1; i++){
-                    if(field == thText[i]){
-                        tdTag = document.createElement('td');
-                        tdTag.appendChild(document.createTextNode(person[field]));
-                        trTag.appendChild(tdTag);
-                    }                        
-=======
-            let cnt = 0;
-            for (field in person) {
-                let num = Object.keys(person).length - (thText.length - 2);
-                num = Object.keys(person).length - num;
-
+            let list = document.querySelectorAll('#thList');
+            
+            for(var i=0; i<list.length; i++){
                 tdTag = document.createElement('td');
-                if (cnt < num) {
-                    tdTag.appendChild(document.createTextNode(person[field]));
-                    trTag.appendChild(tdTag);
-                    cnt++;
->>>>>>> branch 'master' of https://github.com/hanseol/Web.git
-                }
+                tdTag.appendChild(document.createTextNode(person[list[i].innerHTML]));
+                trTag.appendChild(tdTag);                
             }
-
+            
             tdTag = document.createElement('td');
             btn = document.createElement('button');
             btn.onclick = clickFnc;
@@ -96,14 +77,7 @@
 
             return trTag;
         }
-
-
-        let selectedDel = document.createElement('input');
-        selectedDel.setAttribute('type', 'button');
-        selectedDel.setAttribute('value', '선택 삭제');
-        selectedDel.onclick = clickFnc2;
-        let bdy = document.getElementsByTagName('body')[0];
-        bdy.appendChild(selectedDel);
+    
 
         people.forEach(function (val, idx, ary) {
             let newTr = createTr(val);
@@ -114,66 +88,39 @@
             this.parentNode.parentNode.remove();
         }
 
-<<<<<<< HEAD
         function selectAll(){
+        	let checks = document.querySelectorAll('td>input[type=checkbox]');
             for(let i=0; i<checks.length;i++){
                 checks[i].checked = test.checked;
+                checks[i].onclick = testFunc;
             }
             if(checks.length==0){
                 window.alert('항목이 없습니다.');
+                test.checked=false;
             }
         }
 
+        function testFunc(){
+            test.checked=false;
+        }
+
         function deleteAll(){
+        	let checks = document.querySelectorAll('td>input[type=checkbox]:checked');
             for(let i=0; i<checks.length;i++){
-                if(checks[i].checked==true){
-                    checks[i].parentNode.parentNode.remove();
-                }
+                checks[i].parentNode.parentNode.remove();
             }
             let cnt = document.querySelectorAll('td>input[type=checkbox]');
             if(cnt.length==0){
                 test.checked=false;
-                console.log(cnt.length);
             }
         }
 
         let test = document.querySelector('th>input[type=checkbox]');
-        let checks = document.querySelectorAll('td>input[type=checkbox]');
         test.onclick = selectAll;
 
         let test2 = document.querySelector('th>input[type=button');
         test2.onclick = deleteAll;
 
-        
-=======
-
-
-        //선택지우기 querySelectorAll//
-        function clickFnc2() {
-            let checkedAll = document.querySelectorAll('td>input[type="checkbox"]:checked');
-            for(let i=0; i<checkedAll.length;i++){
-                checkedAll[i].parentNode.parentNode.remove();
-            }
-            rows = document.querySelectorAll('tr'); 
-            if(rows)
-            console.log(rows);
-        }
-
-        let chkbox = document.createElement('input');
-        chkbox.setAttribute('type', 'checkbox');
-        chkbox.setAttribute('id', 'selectAll');
-        chkbox.onchange = allCheck;
-        bdy.appendChild(chkbox);
-
-        function allCheck() {
-            let tChk = document.getElementById('selectAll');
-            let checks = document.querySelectorAll('td>input[type="checkbox"]');
-            for (let i = 0; i < checks.length; i++) {
-                checks[i].checked = tChk.checked;
-            }
-        }
->>>>>>> branch 'master' of https://github.com/hanseol/Web.git
     </script>
 </body>
-
 </html>
