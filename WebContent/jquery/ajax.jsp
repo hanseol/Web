@@ -18,13 +18,15 @@
 	board.setContent(con);
 	board.setWriter(wrt);
 	
-	dao.insertBoard(board);
+	Board retVal = new Board();
+	retVal = dao.insertBoardResult(board);
 	
 	//json형식으로 만들기.
-	String result = "{\"boardNo\":\""+boardNo+"\"," 
-		+ "\"title\":\"" + tit + "\"," 
-		+ "\"content\":\"" + con + "\"," 
-		+ "\"writer\":\"" + wrt + "\"}";
+	String result = "{\"boardNo\":\""+retVal.getBoardNo()+"\"," 
+		+ "\"title\":\"" + retVal.getTitle() + "\"," 
+		+ "\"content\":\"" + retVal.getContent() + "\"," 
+		+ "\"writer\":\"" + retVal.getWriter() + "\","
+		+ "\"creationDate\":\"" + retVal.getCreationDate() + "\"}";
 		
 	out.print(result);
 %>

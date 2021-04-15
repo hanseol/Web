@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script>
+        $.ajax({
+            url: 'members.json',
+            success: function (result) {
+                let objs = $(result).map(function (idx, obj) {
+                    let person = {}; //새로운 오브젝트를 생성
+                    person.mem_id = obj.mem_id;
+                    person.first_name = obj.first_name;
+                    person.last_name= obj.last_name;
+                    person.email= obj.email;
+                    person.gender=obj.gender;
+                    person.address=obj.address;
+                    return person;
+                });
+
+                let tbl = $('<table />').attr('border', '1');
+                
+                tbl.append( $('<tr />').append(
+                    $('<th />').html('아이디'),
+                    $('<th />').html('성'),
+                    $('<th />').html('이름'),
+                    $('<th />').html('이메일'),
+                    $('<th />').html('성별'),
+                    $('<th />').html('주소')));
+
+                $(objs).each(function (idx, obj) { 
+                    let trTag = $('<tr />');
+                    trTag.on({ 
+                        'mouseover': function () {
+                            $(this).css('background-color', 'pink');
+                        },
+                        'mouseout': function () {
+                            $(this).css('background-color', '');
+                        },
+                        'click': function () {
+                            console.log($(this).children().eq(0).html());
+                        }
+                    });
+
+                    for (field in obj) {
+                        let tdTag = $('<td />').html(obj[field]);
+                        trTag.append(tdTag);
+                    }
+                    tbl.append(trTag);
+                });
+                $('body').append(tbl);
+
+            }
+        });
+    </script>
+</head>
+
+<body>
+
+
+</body>
+
+</html>

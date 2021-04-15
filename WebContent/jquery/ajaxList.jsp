@@ -13,7 +13,8 @@
 		result += "{\"boardNo\":\""+list.get(i).getBoardNo()+"\"," 
 				+ "\"title\":\"" + list.get(i).getTitle() + "\"," 
 				+ "\"content\":\"" + list.get(i).getContent() + "\"," 
-				+ "\"writer\":\"" + list.get(i).getWriter() + "\"}";
+				+ "\"writer\":\"" + list.get(i).getWriter() + "\","
+				+ "\"creationDate\":\"" + list.get(i).getCreationDate() + "\"}";
 				
 				result += (i == list.size() -1 ? "" : ",");
 	}
