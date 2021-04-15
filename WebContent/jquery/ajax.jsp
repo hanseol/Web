@@ -23,10 +23,10 @@
 	
 	//json형식으로 만들기.
 	String result = "{\"boardNo\":\""+retVal.getBoardNo()+"\"," 
-		+ "\"title\":\"" + retVal.getTitle() + "\"," 
-		+ "\"content\":\"" + retVal.getContent() + "\"," 
-		+ "\"writer\":\"" + retVal.getWriter() + "\","
-		+ "\"creationDate\":\"" + retVal.getCreationDate() + "\"}";
+		+ "\"title\":\""+retVal.getTitle()+"\"," 
+		+ "\"content\":\""+retVal.getContent()+"\"," 
+		+ "\"writer\":\""+retVal.getWriter()+"\","
+		+ "\"creationDate\":\""+retVal.getCreationDate()+"\"}";
 		
 	out.print(result);
 %>

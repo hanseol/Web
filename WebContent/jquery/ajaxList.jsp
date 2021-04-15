@@ -11,10 +11,10 @@
 	//list -> json 파일
 	for(int i=0;i<list.size();i++){
 		result += "{\"boardNo\":\""+list.get(i).getBoardNo()+"\"," 
-				+ "\"title\":\"" + list.get(i).getTitle() + "\"," 
-				+ "\"content\":\"" + list.get(i).getContent() + "\"," 
-				+ "\"writer\":\"" + list.get(i).getWriter() + "\","
-				+ "\"creationDate\":\"" + list.get(i).getCreationDate() + "\"}";
+				+ "\"title\":\"" +list.get(i).getTitle()+"\"," 
+				+ "\"content\":\""+list.get(i).getContent()+"\"," 
+				+ "\"writer\":\""+list.get(i).getWriter()+"\","
+				+ "\"creationDate\":\""+list.get(i).getCreationDate()+"\"}";
 				
 				result += (i == list.size() -1 ? "" : ",");
 	}

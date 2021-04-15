@@ -7,7 +7,6 @@
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 	<script>
 		$(document).ready(function () {
-			//show list 
 			$.ajax({
 				url: 'ajaxList.jsp',
 				dataType: 'json',
@@ -16,62 +15,37 @@
 					let tbl = $('<table />').attr('border','1').attr('id','tbl');
 					let trTag, tdTag, thTag;
 					
-					/* for(data of result){
-						trTag = $('<tr />');
-						for(field in data){
-							console.log(data[field]);
-							tdTag = $('<td />').html(data[field])
-							trTag.append(tdTag);
-						}
-						tbl.append(trTag);
-					} */
-					
-					/* for(data of result){
+					/* for(obj of result){
 						trTag = $('<tr />').append(
-							$('<td />').html(data.boardNo),
-							$('<td />').html(data.title),
-							$('<td />').html(data.content),
-							$('<td />').html(data.writer),
-						)
+								$('<td />').html(obj.boardNo),
+								$('<td />').html(obj.title),
+								$('<td />').html(obj.content),
+								$('<td />').html(obj.writer),
+								$('<td />').html(obj.creationDate),
+								$('<td />').append($('<button />').html('X').on('click',delData))
+								);
 						tbl.append(trTag);
 					} */
-					
-					result.forEach(function(obj,idx){
+
+				result.forEach(function(obj,idx){
 						trTag = $('<tr />').append(
 												$('<td />').html(obj.boardNo),
 												$('<td />').html(obj.title),
 												$('<td />').html(obj.content),
 												$('<td />').html(obj.writer),
 												$('<td />').html(obj.creationDate),
-												$('<td />').html($('<input />').html('X').attr('id','del').attr('type','submit')));
+												$('<td />').html($('<button />').html('X').on('click',delData))
+												);
 												
-												tbl.append(trTag);
-					});
+						tbl.append(trTag);
+					}); 
 					
-					
-					$('#show').html(tbl);
-					
+					 $('#show').html(tbl);
 				},
 				error: function(e){
 					console.error(e);
 				}
 			});
-
-			function delData(){
-				let no = $(this).siblings()[0].innerHTML;
-				 $(this).parent().parent().remove();
-				$.ajax({
-					url: 'ajaxDelList.jsp',
-					data: {boardNo : no},
-					success: function(data){
-						let result = JSON.parse(data);
-						console.log(result);
-					},
-					error: function(e){
-						console.log(e);
-					}
-				});   
-			};
 			
 			$('#frm').submit(function (event) {
 				event.preventDefault(); //single page
@@ -98,7 +72,7 @@
 								$('<td />').html(result.content),
 								$('<td />').html(result.writer),
 								$('<td />').html(result.creationDate),
-								$('<td />').html($('<button />').html('X'))
+								$('<td />').html($('<button />').html('X').on('click',delData))
 						);
 						$('#tbl').append($tr);
 					},
@@ -108,6 +82,18 @@
 				});
 			});
 
+			function delData(){
+				console.log($(this).parent().siblings().eq(0).html());
+				let no = $(this).parent().siblings().eq(0).html();
+				 $(this).parent().parent().remove();
+				 $.ajax({
+					url: 'ajaxDelList.jsp',
+					data: {boardNo:no},
+					success: function(){
+						console.log('삭제완료');
+					}
+				});    
+			};
 		
 		});
 	</script>

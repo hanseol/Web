@@ -7,9 +7,8 @@
 	String bno = request.getParameter("boardNo");
 	
 	int id = Integer.parseInt(bno);
-	out.print(id);
-	//BoardDAO dao = new BoardDAO();
-	//dao.deleteBoard(id);
+	BoardDAO dao = new BoardDAO();
+	dao.deleteBoard(id);
 
 	
 
